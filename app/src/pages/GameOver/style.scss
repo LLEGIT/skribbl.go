@@ -1,0 +1,23 @@
+.main-container {
+    .dashboard {
+        background-color: white;
+        border-radius: 20px;
+        position: absolute;
+        left: 35%;
+        top: 25%;
+        width: 500px;
+        padding: 25px;
+
+        .image-text-holder {
+            padding: 50px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+
+            img {
+                width: 50px;
+                height: auto;
+            }
+        }
+    }
+}
