@@ -1,0 +1,25 @@
+.chatroom-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 3px;
+  height: 655px;
+  width: 300px;
+  background-color: #f5f5f5;
+  border: 1px solid black;
+  .chatroom-messages {
+  }
+  .chatroom-input {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 100%;
+      padding: 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+    display: flex;
+  }
+}

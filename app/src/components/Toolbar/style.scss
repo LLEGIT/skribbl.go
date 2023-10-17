@@ -1,0 +1,14 @@
+.canvas-toolbar {
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .toolbar-element {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 15px;
+    height: 100%;
+  }
+}

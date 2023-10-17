@@ -1,0 +1,29 @@
+.canvas-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  
+  .canvas-placeholder {
+    width: 800px;
+    height: 600px;
+    background-color: #7c7a7a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .canvas-guessing-word {
+    display: flex;
+    background-color: white;
+    width: 804px;
+    border: 2px solid black;
+    border-bottom: none;
+    height: 30px;
+    letter-spacing: 5px;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+}
