@@ -235,7 +235,7 @@ export default function Room() {
         <div style={{ display: "flex" }}>
           <div style={{ marginLeft: "20px", marginTop: "100px" }}>
             <ListGroup>
-              {room?.CurrentPlayers?.map((player) => (
+              {players && players.map((player) => (
                 <ListGroup.Item key={player.ID} style={{display: "flex", alignItems: "center"}}>
                   <Image
                     style={{ width: 30, height: 30, marginRight: 10 }}

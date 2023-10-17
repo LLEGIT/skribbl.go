@@ -307,6 +307,7 @@ func JoinRoom(roomName string, avatar int, nickname string) (int, error) {
 	query := "SELECT * FROM room WHERE name = ?"
 	request := db.QueryRow(query, roomName)
 	err := request.Scan(&room.ID, &room.Name, &room.PlayersNumber, &room.DrawTime, &room.RoundsNumber, &room.CurrentRound, &room.CurrentWord, &room.IsPrivate, &room.CreatedAt)
+
 	if err == sql.ErrNoRows {
 		return room.ID, err
 	}
@@ -322,7 +323,7 @@ func JoinRoom(roomName string, avatar int, nickname string) (int, error) {
 
 	// Add the player to room's players list
 	playerCreation, playerCreationErr := playermanager.CreatePlayer(room, avatar, nickname)
-	if playerCreation == false && playerCreationErr == sql.ErrNoRows {
+	if !playerCreation && playerCreationErr == sql.ErrNoRows {
 		return room.ID, playerCreationErr
 	}
 
@@ -378,7 +379,6 @@ func UpdateRound(roomId int) (int64, error) {
 		log.Fatalf("impossible to update round: %s", err)
 	}
 
-
 	query3 := "SELECT * FROM `player` WHERE `room_id` = ? AND `is_drawing` = 0 LIMIT 1"
 	query4 := "UPDATE `player` SET `is_drawing` = 0 WHERE `room_id` = ? AND `is_drawing` = 1"
 
@@ -389,7 +389,6 @@ func UpdateRound(roomId int) (int64, error) {
 	}
 
 	playerRow := db.QueryRow(query3, roomId)
-	
 
 	var player models.Player
 
@@ -398,7 +397,6 @@ func UpdateRound(roomId int) (int64, error) {
 	if err != nil {
 		return 0, err
 	}
-	
 
 	defer db.Close()
 

@@ -1,6 +1,7 @@
 import React from "react";
 import parseJson from "./parseJson";
 import { Room } from "../models/room";
+import { Player } from "../models/player";
 
 interface socketOnMessageHandlerProps {
   msg: any;
@@ -17,7 +18,7 @@ interface socketOnMessageHandlerProps {
   setCanvasSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
   playerTurnDrawing: boolean | undefined;
   setRoom: React.Dispatch<React.SetStateAction<Room | undefined>>;
-  setPlayers: React.Dispatch<React.SetStateAction<undefined | any>>;
+  setPlayers: React.Dispatch<React.SetStateAction<Player[] | undefined>>;
   setDrawTime: React.Dispatch<React.SetStateAction<undefined | number>>;
 }
 
@@ -33,7 +34,7 @@ export const socketOnMessageHandler = ({
   playerTurnDrawing,
   setRoom,
   setPlayers,
-  setDrawTime,
+  setDrawTime
 }: socketOnMessageHandlerProps) => {
   parseJson(msg.data).then((data) => {
     if (
