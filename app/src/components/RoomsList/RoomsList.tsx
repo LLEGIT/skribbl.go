@@ -6,25 +6,25 @@ import * as WebSocket from "websocket";
 
 export default function RoomsList() {
   const [rooms, setRooms] = useState<Array<Room>>();
+  const [fetchRooms, setFetchRooms] = useState<boolean>();
   const socket = new WebSocket.w3cwebsocket(ApiUrls.ws);
 
   useEffect(() => {
-    if (!rooms) {
-      socket.onopen = () => {
-        socket.send(JSON.stringify({ type: "getAllRooms" }));
-        socket.onmessage = (msg: any) => {
-          let parsedJson = JSON.parse(msg.data);
-          if (parsedJson.Rooms) {
-            setRooms(parsedJson.Rooms);
-          } else {
-            setRooms([]);
-          }
+    socket.onopen = () => {
+      socket.send(JSON.stringify({ type: "getAllRooms" }));
+      socket.onmessage = (msg: any) => {
+        let parsedJson = JSON.parse(msg.data);
+        setRooms(parsedJson?.Rooms ?? []);
 
-          socket.close();
-        };
+        socket.close();
       };
-    }
-  }, []);
+    };
+
+    // Fetch regurlarly
+    setTimeout(() => {
+      setFetchRooms(!fetchRooms);
+    }, 10000);
+  }, [fetchRooms]);
 
   const handleJoinRoom = (roomName: string) => {
     socket.send(
